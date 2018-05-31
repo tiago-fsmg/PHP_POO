@@ -10,22 +10,22 @@ class ContaBanco {
     private $status;
 
     //Metodo Para Abrir Conta---------------------------------------------------
-    public function abrirConta($n, $d, $t) {
+    public function abrirConta($numero, $nome, $tipo) {
 
-        $this->setnumConta($n);
-        $this->setDono($d);
-        $this->setTipo($t);
+        $this->setnumConta($numero);
+        $this->setDono($nome);
+        $this->setTipo($tipo);
         $this->setStatus(TRUE);
 
-        if ($t == "cc" || $t == "CC") {
+        if ($tipo == "cc" || $tipo == "CC") {
             $this->setSaldo(50);
-        } elseif ($t == "cp" || $t == "CP") {
+        } elseif ($tipo == "cp" || $tipo == "CP") {
             $this->setSaldo(150);
         } else {
             echo '<p>Tipo de Conta Desconhecido</p>';
         }
 
-        echo '<p>Conta Aberta</p>';
+        echo "<p>Conta de $nome Aberta</p>";
     }
 
     //Metodo para Fecha a Conta ------------------------------------------------
@@ -37,7 +37,7 @@ class ContaBanco {
                 echo '<p>ERRO: A Conta esta com o Saldo Negativo<br/>Não e Possivel Possivel Fechar a Conta</p>';
             } else {
                 $this->setStatus(FALSE);
-                echo '<p>Conta Fechada</p>';
+                echo "<p>Conta de " . $this->getDono() . " Fechada</p>";
             }
         } else {
             echo '<p>Numero da Conta Imcorreto.</p>';
@@ -45,10 +45,10 @@ class ContaBanco {
     }
 
     //Metodo Para Depositar Dinheiro -------------------------------------------
-    public function depositar($v) {
+    public function depositar($valor) {
         if ($this->getStatus() == TRUE) {
-            $this->setSaldo($this->getSaldo() + $v);
-            echo '<p>Saldo Depositado</p>';
+            $this->setSaldo($this->getSaldo() + $valor);
+            echo "<p>Saldo de $valor Depositado na conta de " . $this->getDono() . "</p>";
         } else {
             echo '<p>ERRO: Conta Inativa</p>';
         }
@@ -59,9 +59,9 @@ class ContaBanco {
         if ($this->getStatus()) {
             if ($this->getSaldo() >= $v) {
                 $this->setSaldo($this->getSaldo() - $v);
-                echo '<p>Saque Realizado</p>';
+                echo "<p>Saque de $v Realizado na conta de " . $this->getDono() . " !</p>";
             } else {
-                echo '<p>Saldo Insuficiente</p>';
+                echo "<p>Saldo de " . $this->getDono() . " Insuficiente</p>";
             }
         } else {
             echo '<p>ERRO:Conta Inativa, Impossivel Realizar Saque</p>';
@@ -71,22 +71,17 @@ class ContaBanco {
     //Metodo Para Pagar Mensalidade --------------------------------------------
 
     public function pagarMensal() {
+
         if ($this->getStatus()) {
+
             if ($this->getTipo() == "CC") {
-                if ($this->getSaldo() >= 12) {
-                    $this->setSaldo($this->getSaldo() - 12);
-                } else {
-                    echo '<p>ERRO:Saldo Insuficiente</p>';
-                }
+                $v = 12;
             } elseif ($this->getTipo() == "CP") {
-                if ($this->getSaldo() >= 20) {
-                    $this->setSaldo($this->getSaldo() - 20);
-                } else {
-                    echo '<p>ERRO:Saldo Insuficiente</p>';
-                }
+                $v = 20;
             }
-        } else {
-            echo '<p>ERRO: Conta Inativa</p>';
+
+            $this->setSaldo($this->getSaldo() - $v);
+            echo "<p>Mensalidade de $v Cobrada na conta de " . $this->getDono() . " !</p>";
         }
     }
 
@@ -95,6 +90,7 @@ class ContaBanco {
         $this->saldo = 0;
         $this->status = FALSE;
         $this->numConta = 0;
+        echo '<p>Conta Criada!</p>';
     }
 
     //Inicio Do Metodo Get e Set -----------------------------------------------
