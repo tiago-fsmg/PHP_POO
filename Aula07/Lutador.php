@@ -4,7 +4,7 @@ require_once 'ExibeLutador.php';
 
 class Lutador implements ExibeLutador {
 
-    //Atributos
+    //Atributos-----------------------------------------------------------------
     private $nome;
     private $nacionalidade;
     private $idade;
@@ -15,7 +15,7 @@ class Lutador implements ExibeLutador {
     private $derrotas;
     private $empates;
 
-    //Metodos 
+    //Metodos ------------------------------------------------------------------
     public function apresentar() {
         echo '<br><br>-----------------------------------------------------------';
         echo "<p>Nome: " . $this->getNome() . " </p>";
@@ -31,11 +31,13 @@ class Lutador implements ExibeLutador {
     }
 
     public function status() {
+        echo '<br><br>-----------------------------------------------------------';
         echo "<p>Nome: " . $this->getNome() . " </p>";
         echo "<p>Peso: " . $this->getPeso() . " </p>";
         echo "<p>Vitorias: " . $this->getVitorias() . " </p>";
         echo "<p>Derrotas: " . $this->getDerrotas() . " </p>";
         echo "<p>Empates: " . $this->getEmpates() . " </p>";
+        echo '-----------------------------------------------------------';
     }
 
     public function ganharLuta() {
@@ -50,7 +52,7 @@ class Lutador implements ExibeLutador {
         $this->setEmpates($this->getEmpates() + 1);
     }
 
-    //Metodo Construtor
+    //Metodo Construtor---------------------------------------------------------
     public function __construct($nome, $nacionalidade, $idade, $altura, $peso, $vitorias, $derrotas, $empates) {
         $this->nome = $nome;
         $this->nacionalidade = $nacionalidade;
@@ -63,8 +65,8 @@ class Lutador implements ExibeLutador {
         echo "<p>Lutador " . $this->getNome() . " cadastrado!</p>";
     }
 
-    //Metodo Get
-    private function getNome() {
+    //Metodo Get----------------------------------------------------------------
+    public function getNome() {
         return $this->nome;
     }
 
@@ -84,7 +86,7 @@ class Lutador implements ExibeLutador {
         return $this->peso;
     }
 
-    private function getCategoria() {
+    public function getCategoria() {
         return $this->categoria;
     }
 
@@ -100,11 +102,11 @@ class Lutador implements ExibeLutador {
         return $this->empates;
     }
 
+    //Metodo Set----------------------------------------------------------------
     private function setNome($nome) {
         $this->nome = $nome;
     }
 
-    //Metodo Set
     private function setNacionalidade($nacionalidade) {
         $this->nacionalidade = $nacionalidade;
     }
@@ -134,15 +136,15 @@ class Lutador implements ExibeLutador {
         $this->categoria = $categoria;
     }
 
-    private function setVitorias($vitorias) {
+    public function setVitorias($vitorias) {
         $this->vitorias = $vitorias;
     }
 
-    private function setDerrotas($derrotas) {
+    public function setDerrotas($derrotas) {
         $this->derrotas = $derrotas;
     }
 
-    private function setEmpates($empates) {
+    public function setEmpates($empates) {
         $this->empates = $empates;
     }
 
