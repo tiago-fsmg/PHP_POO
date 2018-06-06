@@ -5,7 +5,7 @@ require_once 'AcoesVideo.php';
 class Video implements AcoesVideo {
 
     private $titulo;
-    private $avaliação;
+    private $avaliacao;
     private $views;
     private $curtidas;
     private $reproduzindo;
@@ -24,7 +24,7 @@ class Video implements AcoesVideo {
     
     public function __construct($titulo) {
         $this->setTitulo($titulo);
-        $this->setAvaliação(1);
+        $this->avaliacao = 1;
         $this->setViews(0);
         $this->setCurtidas(0);
         $this->setReproduzindo(FALSE);
@@ -34,8 +34,8 @@ class Video implements AcoesVideo {
         return $this->titulo;
     }
 
-    public function getAvaliação() {
-        return $this->avaliação;
+    public function getAvaliacao() {
+        return $this->avaliacao;
     }
 
     public function getViews() {
@@ -54,8 +54,9 @@ class Video implements AcoesVideo {
         $this->titulo = $titulo;
     }
 
-    public function setAvaliação($avaliação) {
-        $this->avaliação = $avaliação;
+    public function setAvaliacao($avaliacao) {
+        $media = ($this->getAvaliacao() + $avaliacao)/$this->getViews();
+        $this->avaliacao = $media;
     }
 
     public function setViews($views) {
